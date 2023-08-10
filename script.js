@@ -13,7 +13,7 @@ const completeBtn = document.getElementById('complete-button');
 
 let countdownTitle = '';
 let countdownDate = '';
-let countdownValue = Date;
+let countdownValue = new Date();
 let countdownActive;
 let savedCountdown;
 
@@ -115,3 +115,23 @@ completeBtn.addEventListener('click', reset);
 
 // on Load
 restorePreviousCountdown();
+
+// Element für Zustimmung
+const consentOverlay = document.getElementById('consent-overlay');
+const consentButton = document.getElementById('consent-button');
+
+// Funktion zum Anzeigen des Zustimmungs-Overlays
+function showConsent() {
+    if (!localStorage.getItem('consentGiven')) {
+        consentOverlay.classList.add('show');
+    }
+}
+
+// Event Listener für den Zustimmungs-Button
+consentButton.addEventListener('click', () => {
+    localStorage.setItem('consentGiven', 'true');
+    consentOverlay.classList.remove('show');
+});
+
+// Beim Laden
+showConsent();
